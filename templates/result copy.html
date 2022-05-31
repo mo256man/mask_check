@@ -1,0 +1,47 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+<title>自作AI比較</title>
+{% set array = ["マスクあり", "マスクなし"] %}
+</head>
+<body>
+<h1>汎用的なAI作れてる？ 自作AI比較大会</h1><br>
+<br>
+<a href="prevpage">＜＜</a>　<a href="nextpage">＞＞</a><br>
+<br>
+<br>
+<table border="1">
+<tr>
+    <td>画像</td>
+    {% for file in files %}
+    <td><img src="./static/images/{{ file }}"></td>
+    {% endfor %}
+</tr>
+{% for row in results %}
+<tr>
+    {% for elm in row %}
+    <td>
+        {% if loop.index == 1 %}
+            <b>{{ elm }}</b>
+        {% else %}
+            {% for dat in elm %}
+                {% if loop.index == 1 %}
+                    <b>マスクあり</b>
+                    <div class="graph"><span class="bar1" style="width:{{dat}}%">{{dat}}%</span></div>
+                {% else %}
+                    <b>マスクなし</b>
+                    <div class="graph"><span class="bar2" style="width:{{dat}}%">{{dat}}%</span></div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</table>
+    
+
+    
+</body>
+</html>

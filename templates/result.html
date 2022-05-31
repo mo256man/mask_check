@@ -1,0 +1,47 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>自作AI比較</title>
+{% set mask = ["マスクあり", "マスクなし"] %}
+</head>
+<body>
+<center>
+<h3>元データの集め方によってAIの出来が変わる！</h3>
+<table class="none">
+    <tr class="none">
+        <td class="none big">自作AI比較大会</td>
+    </tr>
+    <tr class="none">
+        <td class="none big"><a href="prevpage">⏪</a>　　　　　<a href="nextpage">⏩</a></td>
+    </tr>
+</table>
+<table border="1">
+    <tr>
+        <td width="100">No.{{page}}</td>
+        <td><center><font size="+1"><b>{{title}}</b></font></center></td>
+    </tr>
+    <tr>
+        <td>画像</td>
+        <td><img src="./static/images/{{ file }}" width="360" height="360"></td>
+    </tr>
+    {% for i in range(cnt) %}
+    <tr>
+        <td>
+            <b>{{ players[i] }}</b>
+        </td>
+        <td>
+            <table class="none">
+            {% for dat in results[i] %}
+            <tr class="none">
+                <td class="none"><b>{{mask[loop.index-1]}}</b></td>
+                <td class="none"><div class="graph"><span class="bar{{loop.index}}" style="width:{{dat}}%">{{dat}}%</span></div></td>
+            </tr>
+            {% endfor %}
+            </table>
+        </td>
+    {% endfor %}
+    </tr>
+</table>
+</center>
+</body>
+</html>
